@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'AAAAAAA';
+    src: url('//www.yourfiles.com/font/font.ttf') format('truetype');
+}
+
+[class^="yd-icon-"]:before, [class*=" yd-icon-"]:before {
+    font-family: 'AAAAAAA'!important;
+}
