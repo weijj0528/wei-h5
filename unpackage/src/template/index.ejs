@@ -8,6 +8,27 @@
     <script src="http://unpkg.com/vue-ydui/dist/ydui.flexible.js"></script>
 </head>
 <body>
+    <script>
+        //原生环境初始化
+        var native = null; 
+        try {
+            switch ( plus.os.name ) {
+                case "Android":
+                // Android平台: plus.android.*
+                native = plus.android;
+                break;
+                case "iOS":
+                // iOS平台: plus.ios.*
+                native = plus.ios;
+                break;
+                default:
+                    native = null; 
+                break;
+            }
+        } catch (error) {
+            console.log("Native init fail------------------");
+        }
+    </script>
     <div id="app"></div>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[0] %>"></script>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[1] %>"></script>

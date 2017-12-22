@@ -1,7 +1,6 @@
-# iView-project
-> 源自[https://github.com/icarusion/vue-vueRouter-webpack](https://github.com/icarusion/vue-vueRouter-webpack)
-
-本工程适用于基于 Vue.js1.0 + vue-router + webpack + iView 的项目，已经将 iView 配置完成，只需要按步骤初始化即可。
+# wei-h5
+> 
+本工程适用于基于 Vue.js1.0 + vue-router + webpack + dyui 的项目，已经将 dyui 配置完成，只需要按步骤初始化即可。
 
 ## 安装
 ```bush

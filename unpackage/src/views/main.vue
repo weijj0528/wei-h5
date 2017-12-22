@@ -48,7 +48,19 @@ export default {
        menus:menus
     },
     mounted() {
-        
+        if(native){
+            console.log("Native init success------------------");
+            // 导入Activity、Intent类
+            var Intent = native.importClass("android.content.Intent");
+            var Uri = native.importClass("android.net.Uri");
+            // 获取主Activity对象的实例
+            var main = native.runtimeMainActivity();
+            // 创建Intent
+            var uri = Uri.parse("tel:17612157428"); // 这里可修改电话号码
+            var call = new Intent("android.intent.action.CALL",uri);
+            // 调用startActivity方法拨打电话
+            main.startActivity( call );
+        }
     },
     methods: {
         navClose: function(tab, i) {

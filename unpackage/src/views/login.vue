@@ -43,16 +43,15 @@
             submit: function () {
                 console.log("-----------------登录---------------");
                 let _self = this;
-                _self.$router.push('/main');
-                // _self.loading = true;
-                // _self.userLogin(_self.param).then((resp) => {
-                //     console.log(resp);
-                //     _self.loading = false;
-                //     _self.$router.push('/main/home');
-                // }, (err) => {
-                //     _self.loading = false;
-                //     // _self.$router.push('/main');
-                // });
+                _self.loading = true;
+                _self.userLogin(_self.param).then((resp) => {
+                    console.log(resp);
+                    _self.loading = false;
+                    _self.$router.push('/main/home');
+                }, (err) => {
+                    _self.loading = false;
+                    // _self.$router.push('/main');
+                });
             }
         }
     }
