@@ -19,11 +19,13 @@
         </yd-flexbox>
 </template>
 <script>
-    import { mapActions } from 'vuex'
     export default {
         data() {
             return {
-                currentMenuTitle:'首页',
+                currentMenu:{
+                    title:'首页',
+                    link:'/main',
+                },
             }
         },
         props:{
@@ -41,7 +43,7 @@
                                     id:11,
                                     title:'好友管理',
                                     icon:'hezuoguanxi',
-                                    link:'/main/home',
+                                    link:'/main/user',
                                 }
                             ],
                         },
@@ -53,31 +55,14 @@
 
         },
         methods: {
-            ...mapActions(['userLogin']),
-            menuClose(){
-                this.$emit("menu-close",this.currentMenuTitle);
+            menuSelect(){
+                this.$emit("menu-select",this.currentMenu);
             },         
             menuClick(sumMenu){
-                let _self = this;
-                _self.currentMenuTitle = sumMenu.title;
-                _self.menuClose();
-                _self.$router.push(sumMenu.link);
-                console.log("-----------------菜单点击，关闭菜单并跳转："+sumMenu.link+"---------------");
+                this.currentMenu = sumMenu;
+                this.menuSelect();
+                console.log("-----------------菜单点击，关闭菜单："+sumMenu.link+"---------------");
             },
-            submit: function () {
-                console.log("-----------------登录---------------");
-                let _self = this;
-                _self.$router.push('/main');
-                // _self.loading = true;
-                // _self.userLogin(_self.param).then((resp) => {
-                //     console.log(resp);
-                //     _self.loading = false;
-                //     _self.$router.push('/main/home');
-                // }, (err) => {
-                //     _self.loading = false;
-                //     // _self.$router.push('/main');
-                // });
-            }
         }
     }
 </script>

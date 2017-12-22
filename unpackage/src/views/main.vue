@@ -10,7 +10,7 @@
         <router-view></router-view>
         <!-- 侧边菜单 -->
         <yd-popup v-model="showMenu" position="left" width="70%" >
-            <menus @menu-close="closeMenus"></menus>
+            <menus @menu-select="menuSelect"></menus>
         </yd-popup>
         <yd-tabbar slot="tabbar">
             <yd-tabbar-item title="首页" link="#" active>
@@ -48,18 +48,23 @@ export default {
        menus:menus
     },
     mounted() {
+        let _self = this;
+        console.log("Native init ------------------");
         if(native){
             console.log("Native init success------------------");
-            // 导入Activity、Intent类
-            var Intent = native.importClass("android.content.Intent");
-            var Uri = native.importClass("android.net.Uri");
-            // 获取主Activity对象的实例
-            var main = native.runtimeMainActivity();
-            // 创建Intent
-            var uri = Uri.parse("tel:17612157428"); // 这里可修改电话号码
-            var call = new Intent("android.intent.action.CALL",uri);
-            // 调用startActivity方法拨打电话
-            main.startActivity( call );
+            // 监听收到通知
+            native.push.addEventListener( "receive", function ( msg ) {
+                // 分析msg.payload处理业务逻辑 
+                alert( "You receive: " + msg.content ); 
+                _self.$router.push('/main/user');
+            }, true ); 
+            // 监听点击通知
+            native.push.addEventListener( "click", function ( msg ) {
+                // 分析msg.payload处理业务逻辑 
+                alert( "You clicked: " + msg.content ); 
+                _self.$router.push('/main/message');
+            }, true ); 
+           console.log("Native addEventListener success------------------");
         }
     },
     methods: {
@@ -71,10 +76,11 @@ export default {
         openMenus(){
             this.showMenu = true;
         },
-        closeMenus(currentMenuTitle){
+        menuSelect(currentMenu){
             this.showMenu = false;
-            if(currentMenuTitle){
-                this.title = currentMenuTitle;   
+            if(currentMenu){
+                this.title = currentMenu.title;   
+                this.$router.push('/login');   
             }
         },
         goBack(){
