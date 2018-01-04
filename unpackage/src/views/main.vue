@@ -80,7 +80,7 @@ export default {
             this.showMenu = false;
             if(currentMenu){
                 this.title = currentMenu.title;   
-                this.$router.push('/login');   
+                this.$router.push('/main/user');   
             }
         },
         goBack(){

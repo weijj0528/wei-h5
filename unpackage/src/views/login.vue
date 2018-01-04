@@ -48,9 +48,8 @@
                     console.log(resp);
                     _self.loading = false;
                     _self.$router.push('/main/home');
-                }, (err) => {
+                }).catch( (err) => {
                     _self.loading = false;
-                    // _self.$router.push('/main');
                 });
             }
         }
