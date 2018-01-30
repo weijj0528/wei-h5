@@ -32,8 +32,8 @@
             return {
                 loading:false,
                 param: {
-                    userName: "",
-                    password: ""
+                    userName: "weiun",
+                    password: "123456"
                 }
             }
         },
