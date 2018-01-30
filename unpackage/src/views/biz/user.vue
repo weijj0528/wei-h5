@@ -1,6 +1,44 @@
 <!-- Created by Weiun on 2017/1/17.-->
 <template>
-    <div>用户中心</div>
+    <div>
+        <div class="user-top">
+            <img class="user-icon" src="https://ss0.bdstatic.com/6ONWsjip0QIZ8tyhnq/it/u=3545401083,2251952841&fm=77&w_h=121_75&cs=2008984878,1171842780" alt="">
+        </div>
+        <div class="user-name">
+            <span style="font-size:.4rem">韦爵爷</span><br>
+            <span style="font-size:.3rem;margin-top:.1rem;margin-bottom:.1rem"><yd-icon slot="icon" name="diamond-o" size=".3rem" custom></yd-icon>我欲乘风归去</span>
+        </div>
+        <yd-cell-group  style="margin-top:.2rem">
+            <yd-cell-item >
+                <yd-icon slot="icon" name="yinhangqia" size=".42rem" custom></yd-icon>
+                <span slot="left">钱包</span>
+            </yd-cell-item>
+        </yd-cell-group>
+        <yd-cell-group  style="margin-top:.2rem">
+            <yd-cell-item >
+                <yd-icon slot="icon" name="shoucang" size=".42rem" custom></yd-icon>
+                <span slot="left">收藏</span>
+            </yd-cell-item>
+            <yd-cell-item >
+                <yd-icon slot="icon" name="tupian-xianxing" size=".42rem" custom></yd-icon>
+                <span slot="left">相册</span>
+            </yd-cell-item>
+            <yd-cell-item >
+                <yd-icon slot="icon" name="chaibaoguoqujian-xianxing" size=".42rem" custom></yd-icon>
+                <span slot="left">卡包</span>
+            </yd-cell-item>
+            <yd-cell-item >
+                <yd-icon slot="icon" name="jiankongshexiangtou-xianxing" size=".42rem" custom></yd-icon>
+                <span slot="left">表情</span>
+            </yd-cell-item>
+        </yd-cell-group>
+        <yd-cell-group style="margin-top:.2rem">
+            <yd-cell-item >
+                <yd-icon slot="icon" name="shezhi-xianxing" size=".42rem" custom></yd-icon>
+                <span slot="left">设置</span>
+            </yd-cell-item>
+        </yd-cell-group>
+    </div>
 </template>
 <script>
 import util from '../../libs/util'
@@ -50,4 +88,32 @@ export default {
 </script>
 <style scoped>
 /*@import '../styles/common.css';*/
+.user-top{
+    width: 100%;
+    height: 4rem;
+    background-image: url('http://a.hiphotos.baidu.com/image/pic/item/500fd9f9d72a6059f550a1832334349b023bbae3.jpg');
+
+}
+.user-icon{
+    width: 1rem;
+    height: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 1rem;
+    margin-right: .5rem;
+    border-radius:50%; 
+    overflow:hidden;
+}
+.user-name{
+    width: 4rem;
+    height: 1rem;
+    top: 1.5rem;
+    margin-left: 2.2rem;
+    margin-right: .2rem;
+    position: absolute;
+    color: aliceblue
+}
+#h1{
+    size: .4rem;
+}
 </style>

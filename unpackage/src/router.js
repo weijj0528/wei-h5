@@ -7,6 +7,7 @@ import Login from './views/login.vue';
 import home from './views/biz/home.vue';
 import user from './views/biz/user.vue';
 import message from './views/biz/message.vue';
+import order from './views/biz/order.vue';
 
 
 const router = new VueRouter({
@@ -16,8 +17,9 @@ const router = new VueRouter({
         {path: '/login', component: Login},
         {path: '/main', component: Main,children:[
             {path: 'home', component: home},
-            {path: 'user', component: user},
+            {path: 'order', component: order},
             {path: 'message', component: message},
+            {path: 'user', component: user},
         ]}
     ]
 })

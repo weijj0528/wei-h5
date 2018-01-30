@@ -1,16 +1,11 @@
 <!-- Created by Weiun on 2017/1/17.-->
 <template>
     <centerContent :searchShow="true" :moreShow="moreShow">
-      <yd-tab slot="search" :callback="tabCallback">
-          <yd-tab-panel label="报价" tabkey="offer"></yd-tab-panel>
-          <yd-tab-panel label="订单" tabkey="order"></yd-tab-panel>
-          <yd-tab-panel label="物流" tabkey="logis"></yd-tab-panel>
-          <yd-tab-panel label="系统" tabkey="sys"></yd-tab-panel>
-      </yd-tab>
-      <div slot="list" style="margin:0.1rem">
-          消息列表
-      </div>
-      <div slot="more">消息更多查询条件</div>
+        <comSearch slot="search" @more='more'></comSearch>
+        <div slot="list" style="margin:0.1rem">
+            订单列表
+        </div>
+        <div slot="more">订单更多查询条件</div>
     </centerContent>
 </template>
 <script>
@@ -68,9 +63,6 @@ export default {
     more() {
       this.moreShow = !this.moreShow;
       util.bus.$emit("set-function", "hehe"); //触发事件
-    },
-    tabCallback(labe, key) {
-      console.log("--------------Tab切换----------------");
     }
   }
 };
