@@ -1,6 +1,7 @@
 /**
  * Created by aresn on 16/7/18.
  */
+import Vue from 'vue'
 let util = {};
 
 util.alert = function(content) {
@@ -37,5 +38,5 @@ util.mergeObj = function(obj1, obj2) {
   } 
   return obj;
 };
-
+util.bus = new Vue(); 
 export default util;

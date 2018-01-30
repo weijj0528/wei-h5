@@ -6,6 +6,10 @@ import VueRouter from 'vue-router'
 import YDUI from 'vue-ydui';
 import 'vue-ydui/dist/ydui.rem.css';
 import './styles/iconfont.css';
+/** 引入iview部分组件 */
+import { Poptip } from 'iview';
+import 'iview/dist/styles/iview.css';
+Vue.component('Poptip', Poptip);
 /* 使用px：import 'vue-ydui/dist/ydui.px.css'; */
 // import {Icons} from 'vue-ydui/dist/lib.rem/icons';
 /* 使用px：import {Icons} from 'vue-ydui/dist/lib.px/icons'; */

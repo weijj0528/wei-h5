@@ -10,9 +10,12 @@
                 <yd-accordion :accordion="true">
                     <yd-accordion-item v-for="item in menu" :title="item.title" :key="item.id">
                             <yd-icon v-if="item.icon" :name="item.icon" slot="icon" size='.5rem' style="margin-right:.5rem" custom></yd-icon>
-                            <yd-navbar v-for="sub in item.sub" :key="sub.id" :title="sub.title" @click.native="menuClick(sub)"> 
-                                <yd-icon v-if="sub.icon" :name="sub.icon" slot="left" size='.5rem' style="margin-left:.5rem"  @click.native="menuClose" custom></yd-icon>
-                            </yd-navbar>
+                            <yd-cell-group>
+                                <yd-cell-item v-for="sub in item.sub" :key="sub.id" :title="sub.title" type='div' @click.native="menuClick(sub)" arrow>
+                                    <yd-icon slot="left" v-if="sub.icon" :name="sub.icon" size='.5rem' style="margin-left:.5rem"  @click.native="menuClose" custom></yd-icon>
+                                    <span slot="left">我的订单</span>
+                                </yd-cell-item>
+                            </yd-cell-group>
                     </yd-accordion-item>
                 </yd-accordion>
             </yd-flexbox-item>
@@ -44,7 +47,13 @@
                                     title:'好友管理',
                                     icon:'hezuoguanxi',
                                     link:'/main/user',
-                                }
+                                },
+                                {
+                                    id:12,
+                                    title:'好友管',
+                                    icon:'hezuoguanxi',
+                                    link:'/main/user',
+                                },
                             ],
                         },
                     ];

@@ -1,38 +1,13 @@
 <!-- Created by Weiun on 2017/1/17. 页面内容区组件，负责内容区布局-->
 <template>
 	<div class="centerContent" v-bind:style="{width:(layout.contentWidth-10)+'px'}">
-		<Row>
-			<Col :span="sidebar.leftSpan" v-show="leftOnOff">
-			<slot name="left"></slot>
-			</Col>
-			<Col :span="sidebar.centerSpan">
-			<Row type="flex" justify="start" v-show="searchShow">
-				<Col span="24" v-show="searchShow">
-				<slot name="search"></slot>
-				</Col>
-			</Row><br>
-			<Row type="flex" justify="start" v-show="functionShow">
-				<Col span="24" v-show="functionShow">
-				<slot name="function"></slot>
-				</Col>
-			</Row><br>
-			<Row v-bind:style="{height:(layout.contentHeight-210)+'px'}">
-				<Col span="24">
-				<slot name="content"></slot>
-				<Spin size="large" fix v-if="loading" v-bind:style="{height:(layout.contentHeight-210)+'px',opacity: 0.5}"></Spin>
-				</Col>
-			</Row>
-			<Row>
-				<Col span="24" style="height: 30px;margin-top: 5px">
-				<slot name="bottom"></slot>
-				</Col>
-			</Row>
-			</Col>
-			<Col :span="sidebar.rightSpan" v-show="rightOnOff">
-			<slot name="right"></slot>
-			</Col>
-		</Row>
-
+		<yd-flexbox direction="vertical">
+			<div v-if="searchShow" style="width:100%"><slot name="search"></slot></div>
+			<yd-flexbox-item><slot name="list"></slot></yd-flexbox-item>
+			<yd-popup v-model="more" position="right" width="70%" >
+            	<slot name="more"></slot>
+        	</yd-popup>
+        </yd-flexbox>
 	</div>
 </template>
 <script>
@@ -40,29 +15,17 @@
 	export default {
 		data() {
 			return {
-				sidebar: {
-					leftSpan: 0,
-					centerSpan: 24,
-					rightSpan: 0,
-				}
+				more:false
 			}
 		},
 		props: {
-			leftOnOff: {
-				type: Boolean,
-				default: false
-			},
-			rightOnOff: {
-				type: Boolean,
-				default: false
-			},
 			searchShow: {
 				type: Boolean,
-				default: true
+				default: false
 			},
-			functionShow: {
+			moreShow: {
 				type: Boolean,
-				default: true
+				default: false
 			},
 			loading: false
 		},
@@ -74,43 +37,16 @@
 		},
 		methods: {
 			init: function() {
-				if(this.leftOnOff) {
-					this.sidebar.leftSpan = 5;
-					this.sidebar.centerSpan = this.sidebar.centerSpan - 5;
-				}
-				if(this.rightOnOff) {
-					this.sidebar.rightSpan = 5;
-					this.sidebar.centerSpan = this.sidebar.centerSpan - 5;
-				}
+				
 			}
 		},
 		watch: {
-			leftOnOff: function(newVal) {
-				if(newVal) {
-					this.sidebar.leftSpan = 5;
-					this.sidebar.centerSpan = this.sidebar.centerSpan - 5;
-				} else {
-					this.sidebar.leftSpan = 0;
-					this.sidebar.centerSpan = this.sidebar.centerSpan + 5;
-				}
-			},
-			rightOnOff: function(newVal) {
-				if(newVal) {
-					this.sidebar.rightSpan = 5;
-					this.sidebar.centerSpan = this.sidebar.centerSpan - 5;
-				} else {
-					this.sidebar.rightSpan = 0;
-					this.sidebar.centerSpan = this.sidebar.centerSpan + 5;
-				}
+			moreShow:function(newVal,oldVal){
+				this.more = true;
 			}
 		}
 	}
 </script>
 <style scoped>
 	/*@import '../styles/common.css';*/
-	
-	.centerContent {
-		margin: 5px;
-		height: 100%;
-	}
 </style>

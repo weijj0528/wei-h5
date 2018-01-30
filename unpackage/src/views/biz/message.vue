@@ -1,14 +1,23 @@
 <!-- Created by Weiun on 2017/1/17.-->
 <template>
-    <div>消息中心</div>
+    <centerContent :searchShow="true" :moreShow="moreShow">
+        <comSearch slot="search" @more='more'></comSearch>
+        <div slot="list">
+            列表啊啊啊
+        </div>
+        <div slot="more">更多查询条件</div>
+    </centerContent>
 </template>
 <script>
-
+import util from '../../libs/util'
 import { mapGetters } from 'vuex';
+import centerContent from '../../components/centerContent.vue';
+import comSearch from '../../components/com/comSearch.vue';
+
 export default {
     data() {
         return {
-
+            moreShow:false
         }
     },
     computed: {
@@ -27,17 +36,34 @@ export default {
         },
     },
     components: {
-
+        centerContent,
+        comSearch,
     },
     mounted: function() {
         this.$nextTick(function() {
-            // 代码保证 this. 在 document 中
+            // 设置页面右上角更多操作功能项
+            util.bus.$emit('main-more-action',[
+                {title:'添加',key:'add',icon:'compose'},
+                {title:'删除',key:'del',icon:'delete'}
+                ]); //触发事件
+            // 监听页面右上角更多操作功能执行
+            util.bus.$on('main-more-action-execute', (key) => { //Hub接收事件
+                console.log("----------------功能调用-----------------"+key);
+            });
         })
     },
     beforeDestroy() {
-
+        // 移除更多功能
+        util.bus.$emit('main-more-action',[]); 
+        // 移除监听
+        util.bus.$off('main-more-action-execute')
     },
-    methods: {}
+    methods: {
+        more(){
+            this.moreShow = !this.moreShow
+            util.bus.$emit('set-function','hehe'); //触发事件
+        }
+    }
 }
 </script>
 <style scoped>
