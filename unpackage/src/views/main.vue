@@ -66,32 +66,6 @@ export default {
     menus: menus
   },
   mounted() {
-    let _self = this;
-    console.log("Native init ------------------");
-    if (native) {
-      console.log("Native init success------------------");
-      // 监听收到通知
-      native.push.addEventListener(
-        "receive",
-        function(msg) {
-          // 分析msg.payload处理业务逻辑
-          alert("You receive: " + msg.content);
-          _self.$router.push("/main/user");
-        },
-        true
-      );
-      // 监听点击通知
-      native.push.addEventListener(
-        "click",
-        function(msg) {
-          // 分析msg.payload处理业务逻辑
-          alert("You clicked: " + msg.content);
-          _self.$router.push("/main/message");
-        },
-        true
-      );
-      console.log("Native addEventListener success------------------");
-    }
     this.tabbarClick("home");
   },
   created() {

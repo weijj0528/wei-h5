@@ -8,27 +8,6 @@
     <script src="http://unpkg.com/vue-ydui/dist/ydui.flexible.js"></script>
 </head>
 <body>
-    <script>
-        //原生环境初始化
-        var native = null; 
-        document.addEventListener('plusready', function(){
-   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
-            switch ( plus.os.name ) {
-                case "Android":
-                // Android平台: plus.android.*
-                native = plus;
-                break;
-                case "iOS":
-                // iOS平台: plus.ios.*
-                native = plus;
-                break;
-                default:
-                    native = null; 
-                break;
-            }
-            console.log("Native init success. Now OS is " + plus.os.name +"------------------");
-   		});
-    </script>
     <div id="app"></div>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[0] %>"></script>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[1] %>"></script>

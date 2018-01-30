@@ -24,7 +24,7 @@ Vue.use(VueRouter)
 Vue.use(YDUI);
 // Vue.component(Icons.name, Icons);
 
-import loading  from './common/loading/loading'
+import loading from './common/loading/loading'
 // import message  from './common/message/message'
 // import showImg  from './common/showImg/showImg'
 // import dialog from './common/dialog/dialog'
@@ -39,3 +39,38 @@ const routerApp = new Vue({
     router,
     render: h => h(index)
 }).$mount('#app')
+
+document.addEventListener("plusready", function () {
+    console.log(
+        "所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+    );
+    if (plus) {
+        console.log("plus init success------------------");
+        // 监听收到通知
+        plus.push.addEventListener(
+            "receive",
+            function (msg) {
+                console.log("You receive: " + msg);
+                // 分析msg.payload处理业务逻辑
+                let m = eval("(" + msg + ")");
+                routerApp.$router.push(m.link);
+            },
+            true
+        );
+        // 监听点击通知
+        plus.push.addEventListener(
+            "click",
+            function (msg) {
+                console.log("You clicked: " + msg);
+                // 分析msg.payload处理业务逻辑
+                let m = eval("(" + msg + ")");
+                routerApp.$router.push(m.link);
+            },
+            true
+        );
+        console.log("plus addEventListener success------------------");
+    }
+    console.log(
+        "plus60 init success. Now OS is " + plus.os.name + "------------------"
+    );
+});

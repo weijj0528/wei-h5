@@ -6,8 +6,8 @@ import CryptoJS from "crypto-js"
 var httpService = new Vue({
 	data: {
 		customerId: '',
-		// urlCommon: 'http://139.224.15.80:8080/front', // 打包为APP的话需要全地址
-		urlCommon: 'front',
+		urlCommon: 'http://139.224.15.80:8080/front', // 打包为APP的话需要全地址
+		// urlCommon: 'front',
 		language: window.localStorage.language,
 		KEY: window.localStorage.KEY,
 		SID: window.localStorage.SID,
