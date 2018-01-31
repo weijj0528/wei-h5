@@ -9,7 +9,7 @@
     </centerContent>
 </template>
 <script>
-import util from "../../libs/util";
+import bus from "../../libs/bus";
 import { mapGetters } from "vuex";
 import centerContent from "../../components/centerContent.vue";
 import comSearch from "../../components/com/comSearch.vue";
@@ -42,12 +42,12 @@ export default {
   mounted: function() {
     this.$nextTick(function() {
       // 设置页面右上角更多操作功能项
-      util.bus.$emit("main-more-action", [
+      bus.$emit("main-more-action", [
         { title: "添加", key: "add", icon: "jia" },
         { title: "删除", key: "del", icon: "jian" }
       ]); //触发事件
       // 监听页面右上角更多操作功能执行
-      util.bus.$on("main-more-action-execute", key => {
+      bus.$on("main-more-action-execute", key => {
         //Hub接收事件
         console.log("----------------功能调用-----------------" + key);
       });
@@ -55,14 +55,14 @@ export default {
   },
   beforeDestroy() {
     // 移除更多功能
-    util.bus.$emit("main-more-action", []);
+    bus.$emit("main-more-action", []);
     // 移除监听
-    util.bus.$off("main-more-action-execute");
+    bus.$off("main-more-action-execute");
   },
   methods: {
     more() {
       this.moreShow = !this.moreShow;
-      util.bus.$emit("set-function", "hehe"); //触发事件
+      bus.$emit("set-function", "hehe"); //触发事件
     }
   }
 };

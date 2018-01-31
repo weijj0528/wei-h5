@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-import util from '../../libs/util'
+import bus from '../../libs/bus'
 import { mapGetters } from 'vuex';
 export default {
     data() {
@@ -70,18 +70,18 @@ export default {
     mounted: function() {
         this.$nextTick(function() {
             // 代码保证 this. 在 document 中
-            util.bus.$emit('main-more-action',[]); //触发事件
+            bus.$emit('main-more-action',[]); //触发事件
             // 监听页面右上角更多操作功能执行
-            util.bus.$on('main-more-action-execute', (key) => { //Hub接收事件
+            bus.$on('main-more-action-execute', (key) => { //Hub接收事件
                 console.log("----------------功能调用-----------------"+key);
             });
         })
     },
     beforeDestroy() {
         // 移除更多功能
-        util.bus.$emit('main-more-action',[]); 
+        bus.$emit('main-more-action',[]); 
         // 移除监听
-        util.bus.$off('main-more-action-execute')
+        bus.$off('main-more-action-execute')
     },
     methods: {}
 }

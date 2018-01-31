@@ -43,7 +43,7 @@
 	</yd-layout>
 </template>
 <script>
-import util from "../libs/util";
+import bus from "../libs/bus";
 import menus from "./menus";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
@@ -70,7 +70,7 @@ export default {
   },
   created() {
     // 设置右上角更多功能项
-    util.bus.$on("main-more-action", actions => {
+    bus.$on("main-more-action", actions => {
       //Hub接收事件
       console.log("----------------功能设置-----------------");
       this.functionList = actions;
@@ -126,7 +126,7 @@ export default {
     },
     functionClick(key) {
       // 右上角更多功能执行
-      util.bus.$emit("main-more-action-execute", key);
+      bus.$emit("main-more-action-execute", key);
       this.poptipShow();
     },
     tabbarClick(tab) {
