@@ -50,10 +50,12 @@ document.addEventListener("plusready", function () {
         plus.push.addEventListener(
             "receive",
             function (msg) {
-                console.log("You receive: " + msg);
+                console.log(msg);
                 // 分析msg.payload处理业务逻辑
-                let m = eval("(" + msg + ")");
-                routerApp.$router.push(m.link);
+                let payload = eval("(" + msg.payload + ")");
+                if (payload.link) {
+                    routerApp.$router.push(payload.link);
+                }
             },
             true
         );
@@ -61,16 +63,25 @@ document.addEventListener("plusready", function () {
         plus.push.addEventListener(
             "click",
             function (msg) {
-                console.log("You clicked: " + msg);
+                console.log(msg);
                 // 分析msg.payload处理业务逻辑
-                let m = eval("(" + msg + ")");
-                routerApp.$router.push(m.link);
+                let payload = eval("(" + msg.payload + ")");
+                if (payload.link) {
+                    routerApp.$router.push(payload.link);
+                }
             },
             true
         );
         console.log("plus addEventListener success------------------");
+        // 扩展 plus 原型
+        Vue.prototype.$plus = plus;
+        console.log("plus push success------------------");
+        // 封装原型通用方法
+        Vue.prototype.$toast = function (message, options) {
+            plus.nativeUI.toast(message, options);
+        };
     }
     console.log(
-        "plus60 init success. Now OS is " + plus.os.name + "------------------"
+        "plus110 init success. Now OS is " + plus.os.name + "------------------"
     );
 });

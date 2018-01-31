@@ -42,6 +42,7 @@
     </div>
 </template>
 <script>
+import Vue from 'vue'
 import { mapGetters } from "vuex";
 export default {
   data() {
@@ -70,9 +71,35 @@ export default {
   },
   beforeDestroy() {},
   methods: {
-      tabbarClick(tab){
-        console.log("-------------Tab点击-------------")
-      },
+    tabbarClick(tab) {
+      console.log("-------------Tab点击-------------");
+      // 演示通过 plus调用原生方法
+      if (Vue.prototype.$plus) {
+        switch (tab) {
+          case "home":
+            Vue.prototype.$plus.nativeUI.toast("测试原生的Tost功能HOME");
+            break;
+          case "order":
+            Vue.prototype.$plus.nativeUI.confirm(
+              "Are you sure ready?",
+              function(e) {
+                console.log("Close confirm: " + e.index);
+              }
+            );
+            break;
+          case "message":
+            let clientInfo = Vue.prototype.$plus.push.getClientInfo();
+            console.log(clientInfo);
+            Vue.prototype.$plus.nativeUI.toast(
+              "当前用户clientid：" + clientInfo.clientid
+            );
+            break;
+          case "user":
+            Vue.prototype.$plus.nativeUI.toast("测试原生的Tost功能USER");
+            break;
+        }
+      }
+    }
   }
 };
 </script>
