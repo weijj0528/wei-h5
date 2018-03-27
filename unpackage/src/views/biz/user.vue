@@ -91,7 +91,7 @@ export default {
 .user-top{
     width: 100%;
     height: 4rem;
-    background-image: url('http://a.hiphotos.baidu.com/image/pic/item/500fd9f9d72a6059f550a1832334349b023bbae3.jpg');
+    background-color: cadetblue;
 
 }
 .user-icon{

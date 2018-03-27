@@ -16,8 +16,8 @@
 <script>
 import bus from "../../libs/bus";
 import { mapGetters } from "vuex";
-import centerContent from "../../components/centerContent.vue";
-import comSearch from "../../components/com/comSearch.vue";
+import centerContent from "../layout/centerContent.vue";
+import comSearch from "../com/comSearch.vue";
 
 export default {
   data() {

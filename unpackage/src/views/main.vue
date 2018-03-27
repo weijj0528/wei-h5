@@ -44,7 +44,7 @@
 </template>
 <script>
 import bus from "../libs/bus";
-import menus from "./menus";
+import menus from "./main/menus";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {

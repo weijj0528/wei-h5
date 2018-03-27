@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         main: './src/main',
-        vendors: ['vue','vue-router']
+        vendors: ['vue','vue-router','webpack-hot-middleware/client?noInfo=true&reload=true']
     },
     output: {
         path: path.join(__dirname, './../dist')

@@ -1,4 +1,4 @@
-<!-- 登录页面 -->
+<!-- 测试 -->
 <template>
     <detailsLayout>
         <yd-scrolltab>
@@ -18,7 +18,7 @@
     </detailsLayout>
 </template>
 <script>
-import detailsLayout from "../components/detailsLayout.vue"
+import detailsLayout from "./layout/detailsLayout.vue"
 import { mapActions } from "vuex";
 export default {
   data() {
