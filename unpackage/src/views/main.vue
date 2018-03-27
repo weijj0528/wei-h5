@@ -1,30 +1,26 @@
 <!-- -->
 <template>
 	<yd-layout>
+    <!-- 标题栏 -->
 		<yd-navbar slot="navbar" :title="title">
-			<yd-icon name="liebiaoshitucaidan" slot="left" size='.5rem' style="margin-right:.2rem" @click.native="openMenus" custom></yd-icon>
-			<yd-icon name="shangyiyehoutuifanhui" slot="left" size='.5rem' @click.native="goBack" custom></yd-icon>
-			<yd-icon name="shuaxin" slot="right" size='.5rem' style="margin-right:.2rem" @click.native="refresh" custom></yd-icon>
-			<yd-icon name="gengduo-shuxiang" slot="right" @click.native="poptipShow" v-if="functionList.length > 0" custom></yd-icon>
+      <!-- 功能菜单 -->
+			<yd-icon v-if="navBarShow.menu" name="liebiaoshitucaidan" slot="left" size='.5rem' style="margin-right:.2rem" @click.native="openMenus" custom></yd-icon>
+			<!-- 返回 -->
+      <yd-icon v-if="navBarShow.back" name="shangyiyehoutuifanhui" slot="left" size='.5rem' @click.native="goBack" custom></yd-icon>
+			<!-- 刷新 -->
+      <yd-icon v-if="navBarShow.refresh" name="shuaxin" slot="right" size='.5rem' style="margin-right:.2rem" @click.native="refresh" custom></yd-icon>
+			<!-- 更多功能 -->
+      <yd-icon v-if="functionList.length > 0" name="gengduo-shuxiang" slot="right" @click.native="poptipShow" custom></yd-icon>
 		</yd-navbar>
-		<!-- 更多功能 -->
-		<transition name="fade">
-			<div class="more-function" v-show="poptipVisible">
-				<yd-cell-group>
-					<yd-cell-item v-for="fun in functionList" v-bind:key="fun.key" type='div' @click.native="functionClick(fun.key)">
-						<yd-icon slot="icon" :name="fun.icon" size='.4rem' custom></yd-icon>
-						<span slot="left">{{fun.title}}</span>
-					</yd-cell-item>
-				</yd-cell-group>
-			</div>
-		</transition>
-
+    <!-- 更多功能 上拉菜单-->
+    <yd-actionsheet :items="functionList" v-model="moreFunction" cancel="取消"></yd-actionsheet>
 		<!-- 路由页面 -->
 		<router-view></router-view>
 		<!-- 侧边菜单 -->
 		<yd-popup v-model="showMenu" position="left" width="70%">
 			<menus @menu-select="menuSelect" @menu-close="menuClose"></menus>
 		</yd-popup>
+    <!-- 底部导航 -->
 		<yd-tabbar slot="tabbar">
 			<yd-tabbar-item title="首页" type="a" @click.native="tabbarClick('home')" :active="active.home">
 				<yd-icon name="shouye" slot="icon" custom></yd-icon>
@@ -49,9 +45,14 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
+      title: "",
+      navBarShow:{
+        menu:true,
+        back:false,
+        refresh:false,
+      },
       showMenu: false,
-      title: "首页",
-      poptipVisible: false,
+      moreFunction: false,
       functionList: [],
       active: {
         home: true,
@@ -72,8 +73,14 @@ export default {
     // 设置右上角更多功能项
     bus.$on("main-more-action", actions => {
       //Hub接收事件
-      console.log("----------------功能设置-----------------");
+      console.log("----------------功能设置-----------------" + actions.length);
       this.functionList = actions;
+    });
+    // 设置标题
+    bus.$on("main-title", title => {
+      //Hub接收事件
+      console.log("----------------标题设置-----------------" + title);
+      this.title = title;
     });
   },
   methods: {
@@ -119,15 +126,10 @@ export default {
     poptipShow() {
       console.log("----------------展开-----------------");
       if (this.functionList.length == 0) {
-        this.poptipVisible = false;
+        this.moreFunction = false;
       } else {
-        this.poptipVisible = !this.poptipVisible;
+        this.moreFunction = !this.moreFunction;
       }
-    },
-    functionClick(key) {
-      // 右上角更多功能执行
-      bus.$emit("main-more-action-execute", key);
-      this.poptipShow();
     },
     tabbarClick(tab) {
       this.active = {
@@ -139,22 +141,18 @@ export default {
       switch (tab) {
         case "home":
           this.active.home = true;
-          this.title = "首页";
           this.$router.push("/main/home");
           break;
         case "order":
           this.active.order = true;
-          this.title = "我的订单";
           this.$router.push("/main/order");
           break;
         case "message":
           this.active.message = true;
-          this.title = "消息中心";
           this.$router.push("/main/message");
           break;
         case "user":
           this.active.user = true;
-          this.title = "个人中心";
           this.$router.push("/main/user");
           break;
         default:

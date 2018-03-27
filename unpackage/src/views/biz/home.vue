@@ -42,6 +42,7 @@
     </div>
 </template>
 <script>
+import bus from "../../libs/bus";
 import Vue from 'vue'
 import { mapGetters } from "vuex";
 export default {
@@ -66,7 +67,8 @@ export default {
   components: {},
   mounted: function() {
     this.$nextTick(function() {
-      // 代码保证 this. 在 document 中
+      // 设置标题
+      bus.$emit("main-title", "首页");
     });
   },
   beforeDestroy() {},

@@ -46,23 +46,29 @@ export default {
   },
   mounted: function() {
     this.$nextTick(function() {
+      // 设置标题
+      bus.$emit("main-title", "消息");
       // 设置页面右上角更多操作功能项
       bus.$emit("main-more-action", [
-        { title: "添加", key: "add", icon: "jia" },
-        { title: "删除", key: "del", icon: "jian" }
-      ]); //触发事件
-      // 监听页面右上角更多操作功能执行
-      bus.$on("main-more-action-execute", key => {
-        //Hub接收事件
-        console.log("----------------功能调用-----------------" + key);
-      });
+        {
+          label: "添加",
+          callback: () => {
+            this.$dialog.toast({ mes: "添加！" });
+            /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
+          }
+        },
+        {
+          label: "删除",
+          callback: () => {
+            this.$dialog.toast({ mes: "删除！" });
+          }
+        }
+      ]);
     });
   },
   beforeDestroy() {
     // 移除更多功能
     bus.$emit("main-more-action", []);
-    // 移除监听
-    bus.$off("main-more-action-execute");
   },
   methods: {
     more() {
