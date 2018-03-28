@@ -1,6 +1,6 @@
 <!-- Created by Weiun on 2017/1/17.-->
 <template>
-    <centerContent :searchShow="true" :moreShow="moreShow">
+    <centerContent :showSearch="true" :showMore="moreShow">
       <yd-tab slot="search" :callback="tabCallback">
           <yd-tab-panel label="报价" tabkey="offer"></yd-tab-panel>
           <yd-tab-panel label="订单" tabkey="order"></yd-tab-panel>

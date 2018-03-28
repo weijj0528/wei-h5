@@ -1,6 +1,6 @@
 <!-- Created by Weiun on 2017/1/17.-->
 <template>
-    <centerContent :searchShow="true" :moreShow="moreShow">
+    <centerContent :showSearch="true" :showMore="moreShow">
         <comSearch slot="search" @more='more'></comSearch>
         <div slot="list" style="margin:0.1rem">
             订单列表
