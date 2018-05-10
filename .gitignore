@@ -14,3 +14,4 @@ src/config/env.js
 unpackage/dist
 unpackage/debug
 unpackage/release
+unpackage/npm-debug.log
